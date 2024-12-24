@@ -9,13 +9,13 @@ struct MainView: View {
             ZStack {
                 switch selectedTab {
                 case 0:
-                    MainService()
+                    MainServicesView()
                 case 1:
                     MainCopouns()
                 case 2:
                     MainCalendar()
                 case 3:
-                    ConfirmPass()
+                    MainChats()
                 case 4:
                     MainUser()
                 case 5:

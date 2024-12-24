@@ -9,9 +9,14 @@ import SwiftUI
 
 struct MainChats: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+        VStack {
+            
+            ChatIconMenu()
+            
+            Spacer()
+        }
+        .frame(maxHeight: .infinity, alignment: .top)
+    }}
 
 #Preview {
     MainChats()

@@ -63,6 +63,7 @@ struct MainCopouns: View {
                 }
             }
         }
+        .background(Color("MainColor3").opacity(0.1))
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: BackButton(labelText: "Coupons"))
         .onAppear {

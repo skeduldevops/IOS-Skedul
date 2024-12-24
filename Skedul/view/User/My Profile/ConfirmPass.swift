@@ -14,7 +14,7 @@ struct ConfirmPass: View {
     @State private var alertTitle = ""
     @State private var alertMessage = ""
     @State private var isEditEmailActive = false
-    var onSuccess: (() -> Void)? // Tambahkan parameter onSuccess
+    var onSuccess: (() -> Void)?
 
     var body: some View {
         VStack {
@@ -55,8 +55,9 @@ struct ConfirmPass: View {
         }
 
         let credential = EmailAuthProvider.credential(withEmail: email, password: password)
-        user.reauthenticate(with: credential) { result, error in
+        user.reauthenticate(with: credential) { _, error in
             if let error = error {
+                print("Reauthentication failed: \(error.localizedDescription)")
                 alertTitle = "Password incorrect"
                 alertMessage = "Your password is incorrect"
                 showAlert = true

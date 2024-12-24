@@ -25,7 +25,6 @@ struct InitialView: View {
         .onAppear {
             userManager.fetchUserUID()
             
-            // Menyimpan listener
             authStateListenerHandle = Auth.auth().addStateDidChangeListener { auth, user in
                 if user != nil {
                     userManager.isLoginSuccessful = true

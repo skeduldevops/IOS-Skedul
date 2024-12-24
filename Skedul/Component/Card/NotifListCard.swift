@@ -1,8 +1,13 @@
+// NotifListCard.swift
+// Skedul
+// Created by skedul on 11/12/24.
+
 import SwiftUI
 
 struct NotifListCard: View {
     var text: String
-    
+    var isRead: Bool
+
     var body: some View {
         VStack {
             RoundedRectangle(cornerRadius: 20)
@@ -20,7 +25,7 @@ struct NotifListCard: View {
                         VStack(alignment: .leading, spacing: 5) {
                             Text(text)
                                 .font(.custom("Poppins-Light", size: 12))
-                                .foregroundColor(Color("MainColor2"))
+                                .foregroundColor(Color(isRead ? "MainColor3" : "MainColor2"))
                                 .lineLimit(2)
                                 .truncationMode(.tail)
                                 .frame(width: 200, alignment: .leading)
@@ -41,5 +46,8 @@ struct NotifListCard: View {
 }
 
 #Preview {
-    NotifListCard(text: "This is a very long text that will be truncated if necessary")
+    NotifListCard(
+        text: "This is a notification",
+        isRead: false
+    )
 }

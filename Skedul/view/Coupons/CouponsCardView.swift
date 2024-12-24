@@ -101,6 +101,7 @@ struct CouponCard: View {
                     .padding()
                 )
         }
+        .background(Color("MainColor3").opacity(0.1))
         .padding(.vertical, 4)
     }
     

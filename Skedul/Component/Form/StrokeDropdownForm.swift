@@ -1,5 +1,5 @@
 //
-//  StrokeDropdownButton.swift
+//  StrokeDropdownForm.swift
 //  Skedul
 //
 //  Created by skedul on 18/12/24.
@@ -9,19 +9,23 @@ import SwiftUI
 
 struct StrokeDropdownForm: View {
     @State private var isExpanded: Bool = false
-    @State private var selectedValue: String = "You come to us"
-
-    var label: String = "Type of service"
-    var dropdownItems: [String] = ["You come to us", "We come to you"]
+    @State private var selectedValue: String
+    
+    var label: String
+    var dropdownItems: [String]
+    
+    init(label: String, dropdownItems: [String], defaultValue: String? = nil) {
+        self.label = label
+        self.dropdownItems = dropdownItems
+        _selectedValue = State(initialValue: defaultValue ?? dropdownItems.first ?? "")
+    }
 
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 10) {
-                
                 Text(label)
-                    .font(.custom("Poppins-Bold", size: 16))
+                    .font(.custom("Poppins-Medium", size: 16))
                     .foregroundColor(Color("MainColor2"))
-
                 Button(action: {
                     withAnimation {
                         isExpanded.toggle()
@@ -30,7 +34,7 @@ struct StrokeDropdownForm: View {
                     HStack {
                         Text(selectedValue)
                             .font(.custom("Poppins-Bold", size: 14))
-                            .foregroundColor(Color("MainColor3"))
+                            .foregroundColor(Color("MainColor2"))
                         Spacer()
                         Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
                             .foregroundColor(Color("MainColor3"))
@@ -40,7 +44,9 @@ struct StrokeDropdownForm: View {
                     .frame(height: 50)
                     .background(
                         RoundedRectangle(cornerRadius: 15)
-                            .stroke(Color.gray, lineWidth: 1)
+                            .stroke(Color.gray.opacity(0.7), lineWidth: 0.5)
+                            .background(Color.white)
+                            .shadow(color: Color("MainColor3").opacity(0.2), radius: 5, x: 0, y: 2)
                     )
                 }
 
@@ -67,19 +73,28 @@ struct StrokeDropdownForm: View {
                     }
                     .background(
                         RoundedRectangle(cornerRadius: 15)
-                            .stroke(Color.gray, lineWidth: 1)
+                            .stroke(Color.gray.opacity(0.7), lineWidth: 0.5)
                             .background(Color.white)
+                            .shadow(color: Color("MainColor3").opacity(0.2), radius: 15, x: 0, y: 2)
                     )
+                    .padding(.top, 0)
                     .frame(width: geometry.size.width)
-                    .offset(y: geometry.size.height + 4)
                 }
             }
         }
-        .frame(height: 0.1)
-        .padding()
+    }
+}
+
+extension StrokeDropdownForm {
+    static func previewExample() -> StrokeDropdownForm {
+        return StrokeDropdownForm(
+            label: "Type of service",
+            dropdownItems: ["You come to us", "We come to you"],
+            defaultValue: "You come to us"
+        )
     }
 }
 
 #Preview {
-    StrokeDropdownButton()
+    StrokeDropdownForm.previewExample()
 }

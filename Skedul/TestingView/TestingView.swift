@@ -6,40 +6,82 @@
 //
 
 import SwiftUI
-import AVFoundation
-
-class AudioPlayer: ObservableObject {
-    var player: AVAudioPlayer?
-
-    func playSound(soundName: String, fileType: String) {
-        if let url = Bundle.main.url(forResource: soundName, withExtension: fileType) {
-            do {
-                player = try AVAudioPlayer(contentsOf: url)
-                player?.play()
-            } catch {
-                print("Error: Could not find and play the sound file.")
-            }
-        }
-    }
-}
 
 struct TestingView: View {
-
-    @StateObject private var audioPlayer = AudioPlayer()
-
+    @State private var showCard: Bool = false
     var body: some View {
-        VStack {
-            Button(action: {
-                audioPlayer.playSound(soundName: "ID Short", fileType: "wav")
-            }) {
-                Text("Play Sound")
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+        ZStack {
+            Color("MainColor2").opacity(0.2)
+                .ignoresSafeArea()
+                .onTapGesture {
+                    showCard = false
+                }
+
+            VStack {
+                Button(action: {
+                    showCard = true
+                }) {
+                    Text("Show Card")
+                        .font(.headline)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+            }
+
+            if showCard {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 25)
+                        .fill(Color.white)
+                        .shadow(color: Color("MainCustom3"), radius: 10, x: 5, y: 5)
+                        .frame(width: 360, height: 600)
+                        .overlay(
+                            VStack {
+                                Spacer()
+
+                                Image("PopupEmailImage")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 320, height: 320)
+                                
+                                Text("Reset Password")
+                                    .font(.custom("Poppins-Bold", size: 24))
+                                    .foregroundColor(Color("MainColor2"))
+                                
+                                Text("An email has been sent to endieblock3@gmail.com. Check the inbox and click the reset link provided")
+                                    .font(.custom("Poppins-Reguler", size: 16))
+                                    .foregroundColor(Color("MainColor3"))
+                                    .multilineTextAlignment(.center)
+                                    .padding(.horizontal, 35)
+                                    .padding(.top, 2)
+
+                                Spacer()
+                            }
+                        )
+                        .transition(.scale)
+                        .zIndex(1)
+
+                    Button(action: {
+                        showCard = false
+                    }) {
+                        Circle()
+                            .fill(Color.white)
+                            .shadow(color: Color("MainCustom3"), radius: 10, x: 5, y: 5)
+                            .frame(width: 50, height: 50)
+                            .overlay(
+                                Image(systemName: "xmark")
+                                    .font(.system(size: 16, weight: .bold))
+                                    .foregroundColor(Color("MainColor2"))
+                            )
+                    }
+                    .offset(x: 160, y: -350)
+                    .zIndex(2)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
         }
-        .padding()
+        .animation(.easeInOut, value: showCard)
     }
 }
 

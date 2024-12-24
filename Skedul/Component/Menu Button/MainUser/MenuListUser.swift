@@ -76,7 +76,7 @@ struct MenuViewFactory {
     static func view(for option: MenuOption) -> some View {
         switch option {
         case .myBookings:
-            MyBookingView()
+            ServicesListView()
         case .myProfile:
             MyProfileView()
         case .loginSecurity:

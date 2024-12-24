@@ -19,8 +19,9 @@ struct FillForm: View {
         VStack(alignment: .leading) {
             
             Text(label)
-                .font(.custom("Poppins-Medium", size: 14))
+                .font(.custom("Poppins-Medium", size: 16))
                 .padding(.top, 12)
+                .foregroundColor(Color("MainColor2"))
             
             TextField(placeholder, text: $text)
                 .frame(height: 20)

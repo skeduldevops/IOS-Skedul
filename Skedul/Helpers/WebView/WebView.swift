@@ -12,10 +12,13 @@ struct WebView: UIViewRepresentable {
     let htmlString: String
 
     func makeUIView(context: Context) -> WKWebView {
-        WKWebView()
+        let webView = WKWebView()
+        webView.configuration.preferences.javaScriptEnabled = true
+        webView.loadHTMLString(htmlString, baseURL: nil)
+        return webView
     }
 
-    func updateUIView(_ uiView: WKWebView, context: Context) {
-        uiView.loadHTMLString(htmlString, baseURL: nil)
+    func updateUIView(_ webView: WKWebView, context: Context) {
+        webView.loadHTMLString(htmlString, baseURL: nil)
     }
 }

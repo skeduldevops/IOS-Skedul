@@ -37,12 +37,12 @@ class NotificationViewModel: ObservableObject {
 
     func markAsRead(notificationID: String) {
         let db = Firestore.firestore()
-        db.collection("Notification").document(notificationID).updateData(["Status": "0"]) { error in
+        db.collection("Notification").document(notificationID).updateData(["Status": "1"]) { error in
             if let error = error {
                 print("Error updating notification: \(error.localizedDescription)")
             } else {
                 if let index = self.notifications.firstIndex(where: { $0.id == notificationID }) {
-                    self.notifications[index].status = "0"
+                    self.notifications[index].status = "1"
                 }
             }
         }

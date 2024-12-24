@@ -8,6 +8,10 @@
 import SwiftUI
 import Firebase
 import GoogleSignIn
+import FirebaseAuth
+import FirebaseCore
+import FirebaseStorage
+import FirebaseFirestore
 
 @main
 struct SkedulApp: App {
@@ -18,6 +22,8 @@ struct SkedulApp: App {
         WindowGroup {
            InitialView()
                 .environmentObject(UserManager.shared)
+            
         }
     }
 }
+

@@ -14,7 +14,7 @@ struct StrokeButtonNoIcon: View {
     var body: some View {
         Button(action: action) {
             HStack {
-                Text(label)
+            Text(label)
                     .font(.custom("Poppins-Medium", size: 14))
                     .foregroundColor(Color("MainColor2"))
                     .padding(.leading, 5)
